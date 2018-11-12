@@ -35,7 +35,7 @@ public class Api_Test {
                 .get("/cinema_id/{cinema_id}", 2)
                 .then()
                 .statusCode(200)
-                .content("halls.HallName", hasItems("Hall2", "Hall4", "Hall11", "365"));
+                .content("halls.HallName", hasItems("Hall2", "Hall7", "Hall11", "Hall13"));
 
     }
 
@@ -55,17 +55,17 @@ public class Api_Test {
 
         given()
                 .when()
-                .get("/cinema_id/{cinema_id}/Hall_id/{hall_id}", 2, 4)
+                .get("/cinema_id/{cinema_id}/Hall_id/{hall_id}", 2, 7)
                 .then()
                 .statusCode(200)
-                .body("HallName", equalTo("Hall4"));
+                .body("HallName", equalTo("Hall7"));
 
 
     }
 
     @Test
     public void addCinema() {
-        String json = "{\"ROW_ID\":6,\"CinemaName\":\"CinemaFromRest2\",\"HallCount\":2}";
+        String json = "{\"ROW_ID\":6,\"CinemaName\":\"CinemaFromRest\",\"HallCount\":2}";
         given()
                 .when()
                 .config(RestAssuredConfig.config().encoderConfig(EncoderConfig.encoderConfig().encodeContentTypeAs("aplication/json", ContentType.JSON)))
@@ -83,7 +83,6 @@ public class Api_Test {
                 .content("cinemas.CinemaName", hasItem("CinemaFromRest"));
 
 
-
     }
 
     @Test
@@ -95,7 +94,7 @@ public class Api_Test {
                 .config(RestAssuredConfig.config().encoderConfig(EncoderConfig.encoderConfig().encodeContentTypeAs("aplication/json", ContentType.JSON)))
                 .contentType("aplication/json")
                 .body(json)
-                .post("/cinema_id/{cinema_id}",1)
+                .post("/cinema_id/{cinema_id}", 1)
                 .then()
                 .statusCode(200);
 
@@ -106,29 +105,6 @@ public class Api_Test {
                 .statusCode(200)
                 .content("halls.HallName", hasItem("Hall162_fromREST"));
     }
-
-    @Test
-    public void deleteHall() {
-        given()
-                .when()
-                .delete("/cinema_id/{cinema_id}/Hall_id/{hall_id}", 1, 162)
-                .then()
-                .statusCode(200);
-
-
-    }
-
-    @Test
-    public void deleteCinema() {
-
-        given()
-                .when()
-                .delete("/cinema_id/{cinema_id}", 4)
-                .then()
-                .statusCode(200);
-
-    }
-
 
     @Test
     public void updatePlaceStatus1() {
@@ -179,16 +155,16 @@ public class Api_Test {
                 .config(RestAssuredConfig.config().encoderConfig(EncoderConfig.encoderConfig().encodeContentTypeAs("aplication/json", ContentType.JSON)))
                 .contentType("aplication/json")
                 .body(json)
-                .post("/cinema_id/{cinema_id}/Hall_id/{hall_id}/order", 2, 365)
+                .post("/cinema_id/{cinema_id}/Hall_id/{hall_id}/order", 2, 13)
 
                 .then()
                 .statusCode(200);
         given()
                 .when()
-                .get("/cinema_id/{cinema_id}/Hall_id/{hall_id}", 2, 365)
+                .get("/cinema_id/{cinema_id}/Hall_id/{hall_id}", 2, 13)
                 .then()
                 .statusCode(200)
-                .body(equalTo("{\"ROW_ID\":365,\"HallName\":\"365\",\"PlaceCount\":92,\"PlaceList\":{\"places\":[{\"Row\":1,\"place\":1,\"free\":true},{\"Row\":1,\"place\":2,\"free\":true},{\"Row\":1,\"place\":3,\"free\":true},{\"Row\":1,\"place\":4,\"free\":true},{\"Row\":1,\"place\":5,\"free\":true},{\"Row\":1,\"place\":6,\"free\":true},{\"Row\":1,\"place\":7,\"free\":true},{\"Row\":1,\"place\":8,\"free\":true},{\"Row\":2,\"place\":1,\"free\":true},{\"Row\":2,\"place\":2,\"free\":true},{\"Row\":2,\"place\":3,\"free\":true},{\"Row\":2,\"place\":4,\"free\":true},{\"Row\":2,\"place\":5,\"free\":true},{\"Row\":2,\"place\":6,\"free\":true},{\"Row\":2,\"place\":7,\"free\":true},{\"Row\":2,\"place\":8,\"free\":true},{\"Row\":2,\"place\":9,\"free\":true},{\"Row\":3,\"place\":1,\"free\":true},{\"Row\":3,\"place\":2,\"free\":true},{\"Row\":3,\"place\":3,\"free\":true},{\"Row\":3,\"place\":4,\"free\":true},{\"Row\":3,\"place\":5,\"free\":true},{\"Row\":3,\"place\":6,\"free\":true},{\"Row\":3,\"place\":7,\"free\":true},{\"Row\":3,\"place\":8,\"free\":true},{\"Row\":3,\"place\":9,\"free\":true},{\"Row\":4,\"place\":1,\"free\":true},{\"Row\":4,\"place\":2,\"free\":true},{\"Row\":4,\"place\":3,\"free\":true},{\"Row\":4,\"place\":4,\"free\":true},{\"Row\":4,\"place\":5,\"free\":true},{\"Row\":4,\"place\":6,\"free\":true},{\"Row\":4,\"place\":7,\"free\":true},{\"Row\":4,\"place\":8,\"free\":true},{\"Row\":4,\"place\":9,\"free\":true},{\"Row\":5,\"place\":1,\"free\":true},{\"Row\":5,\"place\":2,\"free\":true},{\"Row\":5,\"place\":3,\"free\":true},{\"Row\":5,\"place\":4,\"free\":true},{\"Row\":5,\"place\":5,\"free\":true},{\"Row\":5,\"place\":6,\"free\":true},{\"Row\":5,\"place\":7,\"free\":true},{\"Row\":5,\"place\":8,\"free\":true},{\"Row\":5,\"place\":9,\"free\":true},{\"Row\":6,\"place\":1,\"free\":true},{\"Row\":6,\"place\":2,\"free\":true},{\"Row\":6,\"place\":3,\"free\":true},{\"Row\":6,\"place\":4,\"free\":true},{\"Row\":6,\"place\":5,\"free\":true},{\"Row\":6,\"place\":6,\"free\":true},{\"Row\":6,\"place\":7,\"free\":true},{\"Row\":6,\"place\":8,\"free\":true},{\"Row\":6,\"place\":9,\"free\":true},{\"Row\":7,\"place\":1,\"free\":true},{\"Row\":7,\"place\":2,\"free\":true},{\"Row\":7,\"place\":3,\"free\":true},{\"Row\":7,\"place\":4,\"free\":true},{\"Row\":7,\"place\":5,\"free\":true},{\"Row\":7,\"place\":6,\"free\":true},{\"Row\":7,\"place\":7,\"free\":true},{\"Row\":7,\"place\":8,\"free\":true},{\"Row\":7,\"place\":9,\"free\":true},{\"Row\":8,\"place\":1,\"free\":true},{\"Row\":8,\"place\":2,\"free\":true},{\"Row\":8,\"place\":3,\"free\":true},{\"Row\":8,\"place\":4,\"free\":true},{\"Row\":8,\"place\":5,\"free\":true},{\"Row\":8,\"place\":6,\"free\":true},{\"Row\":8,\"place\":7,\"free\":true},{\"Row\":8,\"place\":8,\"free\":true},{\"Row\":8,\"place\":9,\"free\":true},{\"Row\":9,\"place\":1,\"free\":true},{\"Row\":9,\"place\":2,\"free\":true},{\"Row\":9,\"place\":3,\"free\":true},{\"Row\":9,\"place\":4,\"free\":true},{\"Row\":9,\"place\":5,\"free\":true},{\"Row\":9,\"place\":6,\"free\":true},{\"Row\":9,\"place\":7,\"free\":true},{\"Row\":9,\"place\":8,\"free\":true},{\"Row\":9,\"place\":9,\"free\":true}]}}"));
+                .body(equalTo("{\"ROW_ID\":13,\"HallName\":\"Hall13\",\"PlaceCount\":50,\"PlaceList\":{\"places\":[{\"Row\":1,\"place\":1,\"free\":true},{\"Row\":1,\"place\":2,\"free\":true},{\"Row\":1,\"place\":3,\"free\":true},{\"Row\":1,\"place\":4,\"free\":true},{\"Row\":1,\"place\":5,\"free\":true},{\"Row\":1,\"place\":6,\"free\":true},{\"Row\":1,\"place\":7,\"free\":true},{\"Row\":1,\"place\":8,\"free\":true},{\"Row\":1,\"place\":9,\"free\":true},{\"Row\":1,\"place\":10,\"free\":true},{\"Row\":2,\"place\":1,\"free\":true},{\"Row\":2,\"place\":2,\"free\":true},{\"Row\":2,\"place\":3,\"free\":true},{\"Row\":2,\"place\":4,\"free\":true},{\"Row\":2,\"place\":5,\"free\":true},{\"Row\":2,\"place\":6,\"free\":true},{\"Row\":2,\"place\":7,\"free\":true},{\"Row\":2,\"place\":8,\"free\":true},{\"Row\":2,\"place\":9,\"free\":true},{\"Row\":2,\"place\":10,\"free\":true},{\"Row\":3,\"place\":1,\"free\":true},{\"Row\":3,\"place\":2,\"free\":true},{\"Row\":3,\"place\":3,\"free\":true},{\"Row\":3,\"place\":4,\"free\":true},{\"Row\":3,\"place\":5,\"free\":true},{\"Row\":3,\"place\":6,\"free\":true},{\"Row\":3,\"place\":7,\"free\":true},{\"Row\":3,\"place\":8,\"free\":true},{\"Row\":3,\"place\":9,\"free\":true},{\"Row\":3,\"place\":10,\"free\":true},{\"Row\":4,\"place\":1,\"free\":true},{\"Row\":4,\"place\":2,\"free\":true},{\"Row\":4,\"place\":3,\"free\":true},{\"Row\":4,\"place\":4,\"free\":true},{\"Row\":4,\"place\":5,\"free\":true},{\"Row\":4,\"place\":6,\"free\":true},{\"Row\":4,\"place\":7,\"free\":true},{\"Row\":4,\"place\":8,\"free\":true},{\"Row\":4,\"place\":9,\"free\":true},{\"Row\":4,\"place\":10,\"free\":true},{\"Row\":5,\"place\":1,\"free\":true},{\"Row\":5,\"place\":2,\"free\":true},{\"Row\":5,\"place\":3,\"free\":true},{\"Row\":5,\"place\":4,\"free\":true},{\"Row\":5,\"place\":5,\"free\":true},{\"Row\":5,\"place\":6,\"free\":true},{\"Row\":5,\"place\":7,\"free\":true},{\"Row\":5,\"place\":8,\"free\":true},{\"Row\":5,\"place\":9,\"free\":true},{\"Row\":5,\"place\":10,\"free\":true}]}}"));
 
     }
 
@@ -242,56 +218,39 @@ public class Api_Test {
                 .config(RestAssuredConfig.config().encoderConfig(EncoderConfig.encoderConfig().encodeContentTypeAs("aplication/json", ContentType.JSON)))
                 .contentType("aplication/json")
                 .body(json)
-                .post("/cinema_id/{cinema_id}/Hall_id/{hall_id}/order", 3, 6)
+                .post("/cinema_id/{cinema_id}/Hall_id/{hall_id}/order", 3, 5)
 
                 .then()
                 .statusCode(200);
         given()
                 .when()
-                .get("/cinema_id/{cinema_id}/Hall_id/{hall_id}", 3, 6)
+                .get("/cinema_id/{cinema_id}/Hall_id/{hall_id}", 3, 5)
                 .then()
                 .statusCode(200)
-                .body(equalTo("{\"ROW_ID\":6,\"HallName\":\"Hall6\",\"PlaceCount\":72,\"PlaceList\":{\"places\":[{\"Row\":1,\"place\":1,\"free\":true}," +
-                        "{\"Row\":1,\"place\":2,\"free\":true},{\"Row\":1,\"place\":3,\"free\":true}," +
-                        "{\"Row\":1,\"place\":4,\"free\":true},{\"Row\":1,\"place\":5,\"free\":true}," +
-                        "{\"Row\":1,\"place\":6,\"free\":true},{\"Row\":1,\"place\":7,\"free\":true}," +
-                        "{\"Row\":1,\"place\":8,\"free\":true},{\"Row\":2,\"place\":1,\"free\":true}," +
-                        "{\"Row\":2,\"place\":2,\"free\":true},{\"Row\":2,\"place\":3,\"free\":true}," +
-                        "{\"Row\":2,\"place\":4,\"free\":false},{\"Row\":2,\"place\":5,\"free\":true}," +
-                        "{\"Row\":2,\"place\":6,\"free\":true},{\"Row\":2,\"place\":7,\"free\":true}," +
-                        "{\"Row\":2,\"place\":8,\"free\":true},{\"Row\":2,\"place\":9,\"free\":false}," +
-                        "{\"Row\":3,\"place\":1,\"free\":true},{\"Row\":3,\"place\":2,\"free\":true}," +
-                        "{\"Row\":3,\"place\":3,\"free\":true},{\"Row\":3,\"place\":4,\"free\":true}," +
-                        "{\"Row\":3,\"place\":5,\"free\":true},{\"Row\":3,\"place\":6,\"free\":true}," +
-                        "{\"Row\":3,\"place\":7,\"free\":true},{\"Row\":3,\"place\":8,\"free\":true}," +
-                        "{\"Row\":3,\"place\":9,\"free\":true},{\"Row\":4,\"place\":1,\"free\":true}," +
-                        "{\"Row\":4,\"place\":2,\"free\":true},{\"Row\":4,\"place\":3,\"free\":true}," +
-                        "{\"Row\":4,\"place\":4,\"free\":true},{\"Row\":4,\"place\":5,\"free\":true}," +
-                        "{\"Row\":4,\"place\":6,\"free\":true},{\"Row\":4,\"place\":7,\"free\":true}," +
-                        "{\"Row\":4,\"place\":8,\"free\":true},{\"Row\":4,\"place\":9,\"free\":true}," +
-                        "{\"Row\":5,\"place\":1,\"free\":true},{\"Row\":5,\"place\":2,\"free\":true}," +
-                        "{\"Row\":5,\"place\":3,\"free\":true},{\"Row\":5,\"place\":4,\"free\":true}," +
-                        "{\"Row\":5,\"place\":5,\"free\":true},{\"Row\":5,\"place\":6,\"free\":true}," +
-                        "{\"Row\":5,\"place\":7,\"free\":true},{\"Row\":5,\"place\":8,\"free\":true}," +
-                        "{\"Row\":5,\"place\":9,\"free\":true},{\"Row\":6,\"place\":1,\"free\":true}," +
-                        "{\"Row\":6,\"place\":2,\"free\":true},{\"Row\":6,\"place\":3,\"free\":true}," +
-                        "{\"Row\":6,\"place\":4,\"free\":true},{\"Row\":6,\"place\":5,\"free\":true}," +
-                        "{\"Row\":6,\"place\":6,\"free\":true},{\"Row\":6,\"place\":7,\"free\":true}," +
-                        "{\"Row\":6,\"place\":8,\"free\":true},{\"Row\":6,\"place\":9,\"free\":true}," +
-                        "{\"Row\":7,\"place\":1,\"free\":true},{\"Row\":7,\"place\":2,\"free\":true}," +
-                        "{\"Row\":7,\"place\":3,\"free\":true},{\"Row\":7,\"place\":4,\"free\":true}," +
-                        "{\"Row\":7,\"place\":5,\"free\":true},{\"Row\":7,\"place\":6,\"free\":true}," +
-                        "{\"Row\":7,\"place\":7,\"free\":true},{\"Row\":7,\"place\":8,\"free\":true}," +
-                        "{\"Row\":7,\"place\":9,\"free\":true},{\"Row\":8,\"place\":1,\"free\":true}," +
-                        "{\"Row\":8,\"place\":2,\"free\":true},{\"Row\":8,\"place\":3,\"free\":true}," +
-                        "{\"Row\":8,\"place\":4,\"free\":true},{\"Row\":8,\"place\":5,\"free\":true}," +
-                        "{\"Row\":8,\"place\":6,\"free\":true},{\"Row\":8,\"place\":7,\"free\":false}," +
-                        "{\"Row\":8,\"place\":8,\"free\":true},{\"Row\":8,\"place\":9,\"free\":true}," +
-                        "{\"Row\":9,\"place\":1,\"free\":true},{\"Row\":9,\"place\":2,\"free\":true}," +
-                        "{\"Row\":9,\"place\":3,\"free\":true},{\"Row\":9,\"place\":4,\"free\":true}," +
-                        "{\"Row\":9,\"place\":5,\"free\":true},{\"Row\":9,\"place\":6,\"free\":true}," +
-                        "{\"Row\":9,\"place\":7,\"free\":true},{\"Row\":9,\"place\":8,\"free\":true}," +
-                        "{\"Row\":9,\"place\":9,\"free\":false}]}}"));
+                .body(equalTo("{\"ROW_ID\":5,\"HallName\":\"Hall5\",\"PlaceCount\":50,\"PlaceList\":{\"places\":[{\"Row\":1,\"place\":1,\"free\":true},{\"Row\":1,\"place\":2,\"free\":true},{\"Row\":1,\"place\":3,\"free\":true},{\"Row\":1,\"place\":4,\"free\":true},{\"Row\":1,\"place\":5,\"free\":true},{\"Row\":1,\"place\":6,\"free\":true},{\"Row\":1,\"place\":7,\"free\":true},{\"Row\":1,\"place\":8,\"free\":true},{\"Row\":1,\"place\":9,\"free\":true},{\"Row\":1,\"place\":10,\"free\":true},{\"Row\":2,\"place\":1,\"free\":true},{\"Row\":2,\"place\":2,\"free\":true},{\"Row\":2,\"place\":3,\"free\":true},{\"Row\":2,\"place\":4,\"free\":true},{\"Row\":2,\"place\":5,\"free\":true},{\"Row\":2,\"place\":6,\"free\":true},{\"Row\":2,\"place\":7,\"free\":true},{\"Row\":2,\"place\":8,\"free\":true},{\"Row\":2,\"place\":9,\"free\":true},{\"Row\":2,\"place\":10,\"free\":true},{\"Row\":3,\"place\":1,\"free\":true},{\"Row\":3,\"place\":2,\"free\":true},{\"Row\":3,\"place\":3,\"free\":true},{\"Row\":3,\"place\":4,\"free\":true},{\"Row\":3,\"place\":5,\"free\":true},{\"Row\":3,\"place\":6,\"free\":true},{\"Row\":3,\"place\":7,\"free\":true},{\"Row\":3,\"place\":8,\"free\":true},{\"Row\":3,\"place\":9,\"free\":true},{\"Row\":3,\"place\":10,\"free\":true},{\"Row\":4,\"place\":1,\"free\":true},{\"Row\":4,\"place\":2,\"free\":true},{\"Row\":4,\"place\":3,\"free\":true},{\"Row\":4,\"place\":4,\"free\":true},{\"Row\":4,\"place\":5,\"free\":true},{\"Row\":4,\"place\":6,\"free\":true},{\"Row\":4,\"place\":7,\"free\":true},{\"Row\":4,\"place\":8,\"free\":true},{\"Row\":4,\"place\":9,\"free\":true},{\"Row\":4,\"place\":10,\"free\":true},{\"Row\":5,\"place\":1,\"free\":true},{\"Row\":5,\"place\":2,\"free\":true},{\"Row\":5,\"place\":3,\"free\":true},{\"Row\":5,\"place\":4,\"free\":true},{\"Row\":5,\"place\":5,\"free\":true},{\"Row\":5,\"place\":6,\"free\":true},{\"Row\":5,\"place\":7,\"free\":true},{\"Row\":5,\"place\":8,\"free\":true},{\"Row\":5,\"place\":9,\"free\":true},{\"Row\":5,\"place\":10,\"free\":true}]}}"));
 
     }
+
+    @Test
+    public void deleteHall() {
+        given()
+                .when()
+                .delete("/cinema_id/{cinema_id}/Hall_id/{hall_id}", 1, 162)
+                .then()
+                .statusCode(200);
+
+
+    }
+
+    @Test
+    public void deleteCinema() {
+
+        given()
+                .when()
+                .delete("/cinema_id/{cinema_id}", 6)
+                .then()
+                .statusCode(200);
+
+    }
+
 }
